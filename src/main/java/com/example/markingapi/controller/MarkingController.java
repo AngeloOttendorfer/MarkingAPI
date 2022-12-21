@@ -1,11 +1,8 @@
 package com.example.markingapi.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 public class MarkingController {
     @GetMapping("api/mark")
@@ -19,5 +16,27 @@ public class MarkingController {
         }
         return numbers;
 
+    }
+
+    @GetMapping("api/mark")
+    @ResponseBody
+    public int getGrade(@RequestParam int percentage){
+        int grade = 0;
+        if(percentage < 50){
+            grade = 5;
+        }
+        else if((percentage >= 50) && (percentage < 63)){
+            grade = 4;
+        }
+        else if((percentage >= 63) && (percentage < 75)){
+            grade = 3;
+        }
+        else if((percentage <= 75) && (percentage < 88)){
+            grade = 2;
+        }
+        else{
+            grade = 1;
+        }
+        return grade;
     }
 }
